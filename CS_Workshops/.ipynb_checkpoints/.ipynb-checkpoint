@@ -1,0 +1,597 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# [CS Series] Lecture 3: Object Oriented Programming\n",
+    "### May 6, 2022\n",
+    "Lecture created by: Kavin Suresh and Chinmay Gharpure\n",
+    "\n",
+    "### Table Of Contents\n",
+    "* [Classes](#Classes)\n",
+    "* [Init](#Init)\n",
+    "* [Methods](#Methods)\n",
+    "* [Practice: Classes, Init, Methods](#Practice)\n",
+    "* [Self](#Self)\n",
+    "* [Class + Instance Attributes](#ClassInstance)\n",
+    "    * [Creating Class Instances](#create)\n",
+    "    * [Accessing Class Instances](#access)\n",
+    "    * [Instance Methods](#Instance)\n",
+    "* [Parent vs. Child Classes](#ParentChild)\n",
+    "* [References](#ref)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<a id='Classes'></a>\n",
+    "\n",
+    "# 1. Classes \n",
+    "\n",
+    "## What are classes?\n",
+    "\n",
+    "Python has simple data structures coded in, such as numbers or strings. Classes are a way to represent more complicated data structures that may have many attributes or certain functions needed.\n",
+    "\n",
+    "An example could be a fruit class. It can't be represented by a single string or number. Even a list would be a bit complicated. By using a class, we can set it to have many attributes. Some examples are: fruit name, calories, or sourness level (1-10).\n",
+    "\n",
+    "Now, let us create a fruit class! Below we can create an empty fruit class that is able to be instantiated."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Fruit():\n",
+    "    pass"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now, let us instantiate it."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<__main__.Fruit at 0x7fa4f80b6040>"
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "Fruit()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Wow! We now have a fruit class. It can't do anything, but it certainly is a class and we certainly have instantiated it."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This is cool and all, but we probably want to do more than just have an empty class.\n",
+    "\n",
+    "This is where __init__ comes in!"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<a id='Init'></a>\n",
+    "\n",
+    "# 2. Init \n",
+    "\n",
+    "## What is init?\n",
+    "\n",
+    "Init is a method that defines all the attributes that our class will have. By adding it, we can make sure our class has attributes upon being instantiated. It is created as part of the class definition.\n",
+    "\n",
+    "Below is an example of a red fruit class that includes the init method. It is important to include self as the first argument of the __init__ method. The rest of the arguments are user-inputted attributes when the class is instantiated.\n",
+    "\n",
+    "We will use fruit names, calories, and sourness levels (1-10) as user-inputted attributes. However, we will make the color attribute to always default to \"red\" due to this being the redFruit class."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class redFruit():\n",
+    "    def __init__(self, fruitName, calories, sournessLevel):\n",
+    "        self.fruitName = fruitName\n",
+    "        self.calories = calories\n",
+    "        self.sournessLevel = sournessLevel\n",
+    "        self.color = \"red\""
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now, let us try making an example redFruit class by instantiating it and assigning it to a variable"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "strawberry = redFruit(\"Strawberry\", 15, 7)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let us call some of these attributes we defined to the redFruit class strawberry variable and see how it works!"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'Strawberry'"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "strawberry.fruitName"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "15"
+      ]
+     },
+     "execution_count": 27,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "strawberry.calories"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "7"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "strawberry.sournessLevel"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'red'"
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "strawberry.color"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Amazing! We now have a data structure that can represent red fruits within Python? But if we want to get more complicated and perform operations on these classes?\n",
+    "\n",
+    "This is where methods come in."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<a id='Methods'></a>\n",
+    "\n",
+    "# 3. Methods \n",
+    "\n",
+    "## What are methods?\n",
+    "\n",
+    "Methods are functions that are defined within a class and callable by that class. It allows for operations on the class to be performed. We already saw an example in __init__. Other methods follow a similar structure, where self is the first argument and attributes of the class are called using self.[attribute name]."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let us create a class method for the redFruits class!\n",
+    "\n",
+    "This new method will be called addChocolate. It will change the name of the fruit to be \"Chocolate [fruitName]\", increase calories by 40, decrease sournessLevel by 3, and change the color to brown/red. Finally, it will return a string that says \"[fruitName] has been chocolatified!\" We will call upon the old attributes by using self.[attribute name]."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class redFruit():\n",
+    "    def __init__(self, fruitName, calories, sournessLevel):\n",
+    "        self.fruitName = fruitName\n",
+    "        self.calories = calories\n",
+    "        self.sournessLevel = sournessLevel\n",
+    "        self.color = \"red\"\n",
+    "    \n",
+    "    def addChocolate(self):\n",
+    "        self.fruitName = \"Chocolate \" + self.fruitName\n",
+    "        self.calories = self.calories + 40\n",
+    "        self.sournessLevel = self.sournessLevel - 3\n",
+    "        self.color = \"brown/red\"\n",
+    "        return f\"{self.fruitName} has been chocolatified!\""
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now, let us test it.\n",
+    "\n",
+    "First let us instantiate a member of the redFruit class."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "strawberry = redFruit(\"Strawberry\", 15, 7)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now, let us call the \"addChocolate\" method. We will do this by using the variable we assigned the class to, strawberry, and using a . followed by the method name."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'Chocolate Strawberry has been chocolatified!'"
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "strawberry.addChocolate()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Wow, it looks like the string has been returned. Have the attributes changed?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'Chocolate Strawberry'"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "strawberry.fruitName"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "55"
+      ]
+     },
+     "execution_count": 34,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "strawberry.calories"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "4"
+      ]
+     },
+     "execution_count": 35,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "strawberry.sournessLevel"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'brown/red'"
+      ]
+     },
+     "execution_count": 36,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "strawberry.color"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Hallelujah! It looks like it all worked!"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<a id='Practice'></a>\n",
+    "\n",
+    "# 4. Practice: Classes, Init, Methods\n",
+    "\n",
+    "## Your turn!\n",
+    "\n",
+    "Use what you have just learned about classes, init, and methods to make what is described below.\n",
+    "\n",
+    "You are a horribily disorganized zookeeper who keeps track of your animals via lists. Ew gross, no more! You decide to use classes to organize your animals and their attributes. Make an animal class. When it is instantiated, the user should input its animal name, natural habitat, whether it is an herbivore, carnivore, or omnivcore. It should also have a boolean alive attribute that is default \"True\" without user input. Finally, make a method called kill() within the class that changes the alive attribute to be \"False\" and returns a String that says \"You killed [animal name] :((\".\n",
+    "\n",
+    "Use the below code block to write it. Feel free to create more code blocks below it to test it."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "..."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Chinmay's Work Below"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Ellipsis"
+      ]
+     },
+     "execution_count": 37,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "..."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<a id='Self'></a>\n",
+    "# 5. Instances / Self"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# **What is an instance? How is self related?**"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "An instance is an object that belongs to a class. Consider the redFruit class above. There are many example instances of this class. One example is an Apple with 95 calories and a sourness level of 4. Another example is a raspberry with 65 calories and a sourness level of 8. In Python, we use self to represent an instance of a class. We assign the values of the attributes of an instance through the init function. \n",
+    "\n",
+    "\n",
+    "\n",
+    "All Methods that are a part of the class can be called on a instance of that class. To access attributes of an instance, use instance.attributeName. In the strawberry example above, the fruitName, sournessLevel, and calories are all accessed using this convention. \n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<a id='ParentChild'></a>\n",
+    "# 6. Parent / Child Classes\n",
+    "\n",
+    "Let's say that we have to store information about employees in SAASCorp. SAASCorp aims to use technology and data to help anyone with their future endeavours. We can define a class for employees in SAASCorp as follows. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Employee:\n",
+    "    def __init__(self, name, age, salary):\n",
+    "        self.name = name\n",
+    "        self.age = age\n",
+    "        self.salary = salary # Assume it is in US Dollars\n",
+    "        \n",
+    "    def getSalary(self):\n",
+    "        return self.salary"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "However, all employees aren't the same. An employee could be an engineer, a scientist, a salesperson, etc. We can create separate classes to represent each different employee. This are called **child classes**. We need to pass in the parent class in order to establish each class as a child class. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Engineer(Employee):\n",
+    "    pass\n",
+    "\n",
+    "class Scientist(Employee):\n",
+    "    pass\n",
+    "\n",
+    "class Salesperson(Employee):\n",
+    "    pass\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Properties and Differences - Parent / Child Classes"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- Instances of the child class inherit all attributes and methods of the parent class\n",
+    "- A instance of a child class is an instance of the parent class, but the reverse is NOT TRUE \n",
+    "- Constructors / Methods written in the child class override the constructors / methods written in the parent class. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<a id='ref'></a>\n",
+    "## References \n",
+    "\n",
+    "* https://realpython.com/python3-object-oriented-programming/\n",
+    "* https://www.w3schools.com/python/python_inheritance.asp\n",
+    "<hr \\>"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
